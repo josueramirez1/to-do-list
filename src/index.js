@@ -1,20 +1,37 @@
 import "./css/styles.css";
+import List from "./list.js";
+import Todo from "./todo.js";
 
-class List {
-  constructor(listTitle) {
-    this.listTitle = listTitle;
-  }
+function createTodo() {
+  // This variable will create an object based on information it receives
+  const newTodo = new Todo(
+    "Walk the dogs",
+    "Bella needs her exercise",
+    "today",
+    "high"
+  );
+  const currentListItem = document.querySelector(".current-list-item");
+  // input and attributes
+  const input = document.createElement("input");
+  input.setAttribute("type", "checkbox");
+  input.setAttribute("name", "to-do");
+  input.setAttribute("id", "to-do");
+  // div that contains label and p
+  const currentListText = document.createElement("div");
+  currentListText.classList.add("current-list-text");
+  // label
+  const label = document.createElement("label");
+  label.setAttribute("for", "to-do");
+  label.textContent;
+  label.classList.add("list-item");
 }
 
-class Todo {
-  // This function creates an object. The object is an item that contains a message, checkbox, downvote, upvote and delete button
-  constructor(title, description, dueDate, priority) {
-    this.title = title;
-    this.description = description;
-    this.dueDate = dueDate;
-    this.priority = priority;
-  }
-}
+createTodo();
 
-const today = new List("Today");
-console.log(today);
+{
+  /* <input type="checkbox" name="to-do" id="to-do" />
+            <div class="current-list-text">
+              <label for="to-do" class="list-item">Add to-do</label>
+              <p class="list-description">Type description...</p>
+            </div> */
+}
