@@ -1,5 +1,6 @@
 :root {
-  --lightgrey: #8b8b8b;
+  --lightgrey: hsl(0, 0%, 55%);
+  --lightgreyhover: hsl(0, 0%, 45%);
   --whitesmoke: #f5f5f5;
 }
 
@@ -35,7 +36,7 @@ body {
 
 /* FIRST COLUMN STYLING */
 
-.first-column {
+.first-column-body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -79,6 +80,11 @@ body {
   padding: 0.2rem 1.2rem;
 }
 
+.first-column-list-footer .fa-solid:hover,
+.new-list-footer .fa-solid:hover {
+  color: var(--lightgreyhover);
+}
+
 .new-list-footer {
   display: flex;
   font-size: 0.9rem;
@@ -89,7 +95,7 @@ body {
 
 /* SECOND COLUMN STYLING */
 
-.second-column {
+.second-column-body {
   background-color: #fff;
   padding: 1.2rem;
 }
@@ -105,9 +111,39 @@ body {
   padding-top: 0.4rem;
 }
 
+.current-list-item {
+  width: 100%;
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.list-description {
+  font-size: 0.9rem;
+  color: var(--lightgrey);
+}
+
+/* SECOND COLUMN FOOTER */
+
 .second-column-list-footer {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  font-size: 0.9rem;
+
   color: var(--lightgrey);
+}
+
+.second-column-list-footer .fa-regular,
+.second-column-list-footer .fa-solid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.second-column-list-footer .fa-regular:hover,
+.second-column-list-footer .fa-solid:hover {
+  color: var(--lightgreyhover);
 }

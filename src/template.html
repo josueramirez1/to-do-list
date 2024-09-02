@@ -14,7 +14,7 @@
   <body>
     <div id="content">
       <div class="container">
-        <div class="first-column">
+        <div class="first-column-body">
           <div class="lists">
             <div class="list-title">
               <i class="fa-solid fa-inbox" style="color: #74c0fc"></i>
@@ -38,13 +38,19 @@
             </div>
           </div>
         </div>
-        <div class="second-column">
+        <div class="second-column-body">
           <div class="current-list-title">
             <i class="fa-solid fa-star fa-xl" style="color: #ffd43b"></i>
             <h2>Today</h2>
           </div>
-          <div class="current-list-items">
-            <h3></h3>
+          <div class="current-list-item">
+            <!-- DYNAMIC HTML HERE -->
+            <input type="checkbox" name="to-do" id="to-do" />
+            <div class="current-list-text">
+              <label for="to-do" class="list-item">Add to-do</label>
+              <p class="list-description">Type description...</p>
+            </div>
+            <!-- DYNAMIC HTML HERE -->
           </div>
         </div>
         <div class="first-column-list-footer">
