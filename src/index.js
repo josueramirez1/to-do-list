@@ -1,3 +1,5 @@
+import "./css/styles.css";
+
 class List {
   constructor(listTitle) {
     this.listTitle = listTitle;
