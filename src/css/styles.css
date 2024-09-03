@@ -98,6 +98,7 @@ body {
 .second-column-body {
   background-color: #fff;
   padding: 1.2rem;
+  width: 100%;
 }
 
 .current-list-title {
@@ -119,27 +120,57 @@ body {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  cursor: pointer;
-  border-radius: 11px;
+  border-radius: 5px;
 
-  transition: 0.4s ease-out;
-  opacity: 0.3;
-}
-
-.current-list-item:hover {
-  transform: translateY(10px);
-  box-shadow: 0px 7px 10px rgba(black, 0.5);
+  transition: 0.2s ease-out;
   opacity: 1;
-  background-color: var(--whitesmoke);
+
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
-/* .current-list-item input[type="checkbox"] {
-  cursor: pointer;
-} */
+.current-list-text {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+}
+
+.list-todo-checkbox {
+  display: flex;
+  width: 100%;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.current-list-item input[type="checkbox"] {
+  border-color: #008080;
+}
+
+.list-item {
+  border: none;
+  flex: 1;
+}
+
+.list-item:focus,
+.list-description:focus {
+  outline: none;
+}
+
+.list-todo-description-box {
+  display: flex;
+  width: 100%;
+}
 
 .list-description {
+  display: block;
+  border: none;
+  margin-left: 1.4rem;
+  flex: 1;
+}
+
+.list-item,
+.list-description {
   font-size: 0.9rem;
-  color: var(--lightgrey);
 }
 
 /* SECOND COLUMN FOOTER */
