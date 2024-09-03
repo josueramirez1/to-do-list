@@ -2,38 +2,60 @@ import "./css/styles.css";
 import List from "./list.js";
 import Todo from "./todo.js";
 
-function createTodo() {
+function start(e) {
+  const secondColumnBody = document.querySelector(".second-column-body");
+
+  if (e.target === secondColumnBody) {
+    openTodo();
+    const currentListItem = document.querySelector(".current-list-item");
+    const listItem = document.querySelector(".list-item");
+    console.log(currentListItem);
+    listItem.focus();
+  }
+}
+
+function openTodo() {
   // This variable will create an object based on information it receives
-  const newTodo = new Todo(
-    "Walk the dogs",
-    "Bella needs her exercise",
-    "today",
-    "high"
-  );
-  const currentListItem = document.querySelector(".current-list-item");
-  // div that contains label and p
+
+  const currentListItems = document.querySelector(".current-list-items");
+
+  const currentListItem = document.createElement("div");
+  currentListItem.classList.add("current-list-item");
+  currentListItems.appendChild(currentListItem);
+
   const currentListText = document.createElement("div");
   currentListText.classList.add("current-list-text");
-  // input
+  currentListItem.appendChild(currentListText);
 
-  const input = document.createElement("input");
-  input.setAttribute("type", "checkbox");
-  input.setAttribute("name", "to-do");
-  input.setAttribute("id", "to-do");
-  // label
-  const label = document.createElement("label");
-  label.setAttribute("for", "to-do");
-  label.textContent;
-  label.classList.add("list-item");
+  // FIRST DIV
+  const listTodoCheckbox = document.createElement("div");
+  listTodoCheckbox.classList.add("list-todo-checkbox");
+  currentListText.appendChild(listTodoCheckbox);
+
+  // input: checkbox
+  const inputCheckbox = document.createElement("input");
+  inputCheckbox.type = "checkbox";
+  inputCheckbox.name = "todo";
+  inputCheckbox.id = "todo";
+  inputCheckbox.value = "item";
+  // input:title text
+  const inputTitleText = document.createElement("input");
+  inputTitleText.classList.add("list-item");
+  inputTitleText.setAttribute("type", "text");
+  inputTitleText.placeholder = "New To-Do";
+
+  listTodoCheckbox.appendChild(inputCheckbox);
+  listTodoCheckbox.appendChild(inputTitleText);
+
+  //SECOND DIV
+  const listTodoDescriptionBox = document.createElement("div");
+  listTodoDescriptionBox.classList.add("list-todo-description-box");
+  currentListText.appendChild(listTodoDescriptionBox);
+  const inputDescription = document.createElement("input");
+  inputDescription.classList.add("list-description");
+  inputDescription.type = "text";
+  inputDescription.placeholder = "Notes";
+  listTodoDescriptionBox.appendChild(inputDescription);
 }
 
-createTodo();
-
-{
-  /*
-            <div class="current-list-text">
-            <input type="checkbox" name="to-do" id="to-do" />
-              <label for="to-do" class="list-item">Add to-do</label>
-              <p class="list-description">Type description...</p>
-            </div> */
-}
+document.addEventListener("click", start);
