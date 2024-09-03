@@ -112,7 +112,7 @@ body {
   padding-top: 0.4rem;
 }
 
-.current-list-item {
+.current-list-items {
   width: 100%;
   height: 80px;
   padding: 0.4rem 1rem;
@@ -142,9 +142,9 @@ body {
   margin-bottom: 0.4rem;
 }
 
-.current-list-item input[type="checkbox"] {
+/* .current-list-items input[type="checkbox"] {
   border-color: #008080;
-}
+} */
 
 .list-item {
   border: none;
