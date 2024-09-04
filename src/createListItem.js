@@ -1,4 +1,4 @@
-function todoDescriptionBox() {
+function todoDescription() {
   // Div that will contain input description
   const listTodoDescriptionBox = document.createElement("div");
   listTodoDescriptionBox.classList.add("list-todo-description-box");
@@ -41,7 +41,7 @@ function currentListText() {
   const currentListText = document.createElement("div");
   currentListText.classList.add("current-list-text");
   currentListText.appendChild(todoListCheckboxAndTitle().listTodoCheckbox);
-  currentListText.appendChild(todoDescriptionBox().listTodoDescriptionBox);
+  currentListText.appendChild(todoDescription().listTodoDescriptionBox);
   // currentListItem.appendChild(currentListText);
   return { currentListText };
 }
