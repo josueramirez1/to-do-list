@@ -1,3 +1,5 @@
+import createListItem from "./createListItem.js";
+
 export default class Todo {
   // This function creates an object. The object is an item that contains a message, checkbox, downvote, upvote and delete button
   constructor(title, description, dueDate, priority) {
@@ -6,4 +8,10 @@ export default class Todo {
     this.dueDate = dueDate;
     this.priority = priority;
   }
+
+  static createTodo() {
+    createListItem();
+  }
+
+  keepTodo() {}
 }
