@@ -1,19 +1,23 @@
-export default function createListItem() {
-  const currentListItems = document.querySelector(".current-list-items");
-  const currentListItem = document.createElement("div");
-  currentListItem.classList.add("current-list-item");
-  currentListItem.classList.add("active");
-  currentListItems.appendChild(currentListItem);
+function todoDescriptionBox() {
+  // Div that will contain input description
+  const listTodoDescriptionBox = document.createElement("div");
+  listTodoDescriptionBox.classList.add("list-todo-description-box");
+  // The input description
+  const inputDescription = document.createElement("input");
+  inputDescription.classList.add("list-description");
+  inputDescription.type = "text";
+  inputDescription.placeholder = "Notes";
 
-  // DIV THAT CONTAINS TEXT
-  const currentListText = document.createElement("div");
-  currentListText.classList.add("current-list-text");
-  currentListItem.appendChild(currentListText);
+  listTodoDescriptionBox.appendChild(inputDescription);
 
+  return { listTodoDescriptionBox };
+}
+
+function todoListCheckboxAndTitle() {
   // FIRST DIV
   const listTodoCheckbox = document.createElement("div");
   listTodoCheckbox.classList.add("list-todo-checkbox");
-  currentListText.appendChild(listTodoCheckbox);
+  // currentListText.appendChild(listTodoCheckbox);
 
   // input: checkbox
   const inputCheckbox = document.createElement("input");
@@ -30,14 +34,27 @@ export default function createListItem() {
   listTodoCheckbox.appendChild(inputCheckbox);
   listTodoCheckbox.appendChild(inputTitleText);
 
-  // SECOND DIV
+  return { listTodoCheckbox };
+}
 
-  const listTodoDescriptionBox = document.createElement("div");
-  listTodoDescriptionBox.classList.add("list-todo-description-box");
-  currentListText.appendChild(listTodoDescriptionBox);
-  const inputDescription = document.createElement("input");
-  inputDescription.classList.add("list-description");
-  inputDescription.type = "text";
-  inputDescription.placeholder = "Notes";
-  listTodoDescriptionBox.appendChild(inputDescription);
+function currentListText() {
+  const currentListText = document.createElement("div");
+  currentListText.classList.add("current-list-text");
+  currentListText.appendChild(todoListCheckboxAndTitle().listTodoCheckbox);
+  currentListText.appendChild(todoDescriptionBox().listTodoDescriptionBox);
+  // currentListItem.appendChild(currentListText);
+  return { currentListText };
+}
+
+function currentListItem() {
+  const currentListItem = document.createElement("div");
+  currentListItem.classList.add("current-list-item");
+  currentListItem.classList.add("active");
+  currentListItem.appendChild(currentListText().currentListText);
+  return { currentListItem };
+}
+
+export default function createListItem() {
+  const currentListItems = document.querySelector(".current-list-items");
+  currentListItems.appendChild(currentListItem().currentListItem);
 }

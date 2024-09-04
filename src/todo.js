@@ -12,6 +12,4 @@ export default class Todo {
   static createTodo() {
     createListItem();
   }
-
-  keepTodo() {}
 }
