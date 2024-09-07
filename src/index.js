@@ -3,18 +3,38 @@ import Todo from "./todo.js";
 
 function start() {
   const secondColumnBody = document.querySelector(".second-column-body");
-  initialTodo();
+  const currentListDiv = document.querySelector(".current-list-items");
+
   secondColumnBody.addEventListener("click", (e) => {
-    activeTodo(e);
-    inactiveTodo(e);
+    let currentListItems = [...currentListDiv.children];
+    createTodo(e, currentListDiv, currentListItems);
+
+    // document.addEventListener("click", addNewTodo(currentListItems));
   });
 }
 
-function initialTodo() {
-  // select parent
-  const currentListItems = document.querySelector(".current-list-items");
-  // if list does not have an item, add one
-  if (!currentListItems.hasChildNodes()) Todo.createTodo();
+function createTodo(e, currentListDiv, currentListItems) {
+  // initial todo that creates array. Function ends early
+  if (!currentListDiv.hasChildNodes()) {
+    Todo.createTodo();
+    return;
+  }
+  // engine loops through each item
+
+  let inactivity = currentListItems.every((item) => {
+    return item.matches(".inactive");
+  });
+
+  let activity = currentListItems.find((item) => {
+    return item.matches(".active");
+  });
+
+  if (inactivity) Todo.createTodo();
+  if (activity) {
+    currentListItems.forEach((item) => {
+      inactiveTodo(item);
+    });
+  }
 }
 
 function activeTodo(e) {
@@ -27,26 +47,15 @@ function activeTodo(e) {
   }
 }
 
-function inactiveTodo(e) {
-  const currentList = [...document.querySelectorAll(".current-list-item")];
-  if (e.target.matches(".second-column-body")) {
-    currentList.forEach((item) => {
-      item.classList.add("inactive");
-      item.classList.remove("active");
-      hideNotes();
-    });
-  }
-}
-
-function hideNotes() {
-  const itemGrandchildren = [
+function inactiveTodo(item) {
+  item.classList.add("inactive");
+  item.classList.remove("active");
+  let itemGrandchildren = [
     ...document.querySelector(".current-list-text").children,
   ];
-  for (let todo of itemGrandchildren) {
-    if (todo.matches(".list-todo-description-box")) {
-      todo.style.visibility = "hidden";
-    }
-  }
+  itemGrandchildren.forEach((i) => {
+    if (i.matches(".list-todo-description-box")) i.style.visibility = "hidden";
+  });
 }
 
 start();
