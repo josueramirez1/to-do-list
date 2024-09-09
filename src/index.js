@@ -4,14 +4,11 @@ import Todo from "./todo.js";
 function start() {
   const secondColumnBody = document.querySelector(".second-column-body");
   const currentListDiv = document.querySelector(".current-list-items");
-  let listItemDiv = [...document.querySelectorAll(".list-item")];
 
   secondColumnBody.addEventListener("click", (e) => {
     let currentListItems = [...currentListDiv.children];
-    let listItemDiv = [...document.querySelectorAll(".list-item")];
-
     createTodo(e, currentListDiv, currentListItems);
-    activeTodo(e);
+    // activeTodo(e);
   });
 }
 
@@ -21,28 +18,29 @@ function createTodo(e, currentListDiv, currentListItems) {
     Todo.createTodo();
     return;
   }
-
   // engine begins to look at array to see if every item has a class of inactive. If this is true, then it will create a new todo.
-  let inactivity = currentListItems.every((item) => {
-    return item.matches(".inactive");
-  });
+  let inactivity = currentListItems.every((item) => item.matches(".inactive"));
   // engine looks through array to find item that contains the active class. If this is true, then a function will fire which will remove the active todo and remove visibility.
-  let activity = currentListItems.find((item) => {
-    return item.matches(".active");
-  });
-
-  if (inactivity && !e.target.matches(".list-item")) Todo.createTodo();
+  let activity = currentListItems.find((item) => item.matches(".active"));
+  // Make a new todo as long as list-item is not clicked on
+  if (
+    inactivity &&
+    !e.target.matches(".list-item") &&
+    !e.target.matches("#todo")
+  )
+    Todo.createTodo();
+  // If there is at least one todo active, make it inactive
   if (activity) {
     currentListItems.forEach((item) => {
       inactiveTodo(item);
     });
   }
+  // if user clicks on list-item, reactivates todo to make corrections
   if (e.target.matches(".list-item")) activeTodo(e);
 }
 
 function activeTodo(e) {
   if (e.target.matches(".list-item")) {
-    console.log("yes");
     e.target.closest(".current-list-item").classList.remove("inactive");
     e.target.closest(".current-list-item").classList.add("active");
     e.target.closest(
