@@ -7,13 +7,11 @@ function start() {
 
   secondColumnBody.addEventListener("click", (e) => {
     let currentListItems = [...currentListDiv.children];
-    createTodo(e, currentListDiv, currentListItems);
-    // activeTodo(e);
+    addTodo(e, currentListDiv, currentListItems);
   });
 }
 
-function createTodo(e, currentListDiv, currentListItems) {
-  console.log(e.target);
+function addTodo(e, currentListDiv, currentListItems) {
   // initial todo that creates array. Function ends early
   if (!currentListDiv.hasChildNodes()) {
     Todo.createTodo();
@@ -42,9 +40,10 @@ function createTodo(e, currentListDiv, currentListItems) {
     });
   }
   // if user clicks on list-item, reactivates todo to make corrections
-  if (e.target.matches(".list-item")) activeTodo(e);
-
+  activeTodo(e);
+  // if user click on trash icon, todo is deleted
   deleteTodo(e);
+  // add todo to local storage
 }
 
 function activeTodo(e) {
@@ -70,6 +69,13 @@ function inactiveTodo(item) {
 function deleteTodo(e) {
   if (e.target.matches(".fa-trash"))
     e.target.closest(".current-list-item").remove();
+}
+
+function addTodoToLocalStorage() {
+  let title = document.querySelector(".list-item").value;
+  let description = document.querySelector(".list-description").value;
+  let todo = new Todo(title, description);
+  console.log(todo);
 }
 
 start();

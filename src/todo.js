@@ -1,3 +1,4 @@
+import addToLocalStorage from "./addToLocalStorage.js";
 import createListItem from "./createListItem.js";
 
 export default class Todo {
@@ -11,5 +12,6 @@ export default class Todo {
 
   static createTodo() {
     createListItem();
+    addToLocalStorage();
   }
 }
