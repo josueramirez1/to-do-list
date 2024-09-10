@@ -4,17 +4,38 @@ import Todo from "./todo.js";
 function start() {
   const secondColumnBody = document.querySelector(".second-column-body");
   const currentListDiv = document.querySelector(".current-list-items");
+  let listItems = document.querySelectorAll(".list-item");
+  Todo.createLocalStorageArray();
 
+  addTodoToDomAndLocalStorage(secondColumnBody, currentListDiv, listItems);
+}
+
+function addTodoToDomAndLocalStorage(
+  secondColumnBody,
+  currentListDiv,
+  listItems
+) {
   secondColumnBody.addEventListener("click", (e) => {
     let currentListItems = [...currentListDiv.children];
-    addTodo(e, currentListDiv, currentListItems);
+    let todoObj = new Todo();
+    addTodo(e, currentListDiv, currentListItems, todoObj);
+    // add event listener
+    addObjectToLS(listItems);
   });
 }
 
-function addTodo(e, currentListDiv, currentListItems) {
+function addObjectToLS(listItems) {
+  listItems = document.querySelectorAll(".list-item");
+  listItems.forEach((item) => {
+    item.addEventListener("click", (e) => {});
+  });
+}
+
+function addTodo(e, currentListDiv, currentListItems, todoObj) {
   // initial todo that creates array. Function ends early
   if (!currentListDiv.hasChildNodes()) {
-    Todo.createTodo();
+    // Todo.createTodo();
+    todoObj.createTodo();
     return;
   }
   // engine begins to look at array to see if every item has a class of inactive. If this is true, then it will create a new todo.
@@ -28,7 +49,8 @@ function addTodo(e, currentListDiv, currentListItems) {
     !e.target.matches(".list-description") &&
     !e.target.matches("input[type='checkbox']")
   )
-    Todo.createTodo();
+    // Todo.createTodo();
+    todoObj.createTodo();
   // If there is at least one todo active, make it inactive
   if (
     activity &&
@@ -69,13 +91,6 @@ function inactiveTodo(item) {
 function deleteTodo(e) {
   if (e.target.matches(".fa-trash"))
     e.target.closest(".current-list-item").remove();
-}
-
-function addTodoToLocalStorage() {
-  let title = document.querySelector(".list-item").value;
-  let description = document.querySelector(".list-description").value;
-  let todo = new Todo(title, description);
-  console.log(todo);
 }
 
 start();

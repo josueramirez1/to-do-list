@@ -1,11 +1,15 @@
-export default function addToLocalStorage() {
-  let title = document.querySelector(".list-item").value;
-  let description = document.querySelector(".list-description").value;
+export default function addToLocalStorage(t) {
+  let listItem = [...document.querySelectorAll(".list-item")];
+  // let descriptions = document.querySelector(".list-description");
 
-  let todoObj = {
-    todoTitle: title,
-    todoDescription: description,
-  };
+  console.log(t);
 
-  localStorage.setItem("todoObj", JSON.stringify(todoObj));
+  let titles = listItem.map((title) => title.value);
+
+  // let todoObj = {
+  //   todoTitle: title,
+  //   todoDescription: description,
+  // };
+
+  // localStorage.setItem("todoObj", JSON.stringify(todoObj));
 }

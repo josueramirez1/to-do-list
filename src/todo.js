@@ -1,4 +1,3 @@
-import addToLocalStorage from "./addToLocalStorage.js";
 import createListItem from "./createListItem.js";
 
 export default class Todo {
@@ -10,8 +9,12 @@ export default class Todo {
     this.priority = priority;
   }
 
-  static createTodo() {
+  static createLocalStorageArray() {
+    let listArrayOfObjects = [];
+    localStorage.setItem("Todo-List", JSON.stringify(listArrayOfObjects));
+  }
+
+  createTodo() {
     createListItem();
-    addToLocalStorage();
   }
 }
