@@ -54,7 +54,14 @@ function todoDescription() {
   inputDescription.type = "text";
   inputDescription.placeholder = "Notes";
 
+  const trash = document.createElement("i");
+  trash.classList.add("fa-solid");
+  trash.classList.add("fa-trash");
+
+  // <i class="fa-solid fa-trash"></i>
+
   listTodoDescriptionBox.appendChild(inputDescription);
+  listTodoDescriptionBox.appendChild(trash);
 
   return { listTodoDescriptionBox };
 }

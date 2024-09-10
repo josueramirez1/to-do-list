@@ -13,6 +13,7 @@ function start() {
 }
 
 function createTodo(e, currentListDiv, currentListItems) {
+  console.log(e.target);
   // initial todo that creates array. Function ends early
   if (!currentListDiv.hasChildNodes()) {
     Todo.createTodo();
@@ -26,17 +27,24 @@ function createTodo(e, currentListDiv, currentListItems) {
   if (
     inactivity &&
     !e.target.matches(".list-item") &&
-    !e.target.matches("#todo")
+    !e.target.matches(".list-description") &&
+    !e.target.matches("input[type='checkbox']")
   )
     Todo.createTodo();
   // If there is at least one todo active, make it inactive
-  if (activity) {
+  if (
+    activity &&
+    !e.target.matches(".list-description") &&
+    !e.target.matches(".current-list-text")
+  ) {
     currentListItems.forEach((item) => {
       inactiveTodo(item);
     });
   }
   // if user clicks on list-item, reactivates todo to make corrections
   if (e.target.matches(".list-item")) activeTodo(e);
+
+  deleteTodo(e);
 }
 
 function activeTodo(e) {
@@ -57,6 +65,11 @@ function inactiveTodo(item) {
     ...document.querySelectorAll(".list-todo-description-box"),
   ];
   todoDescriptionBox.forEach((i) => (i.style.visibility = "hidden"));
+}
+
+function deleteTodo(e) {
+  if (e.target.matches(".fa-trash"))
+    e.target.closest(".current-list-item").remove();
 }
 
 start();
