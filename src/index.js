@@ -17,25 +17,16 @@ function addTodoToDomAndLocalStorage(
 ) {
   secondColumnBody.addEventListener("click", (e) => {
     let currentListItems = [...currentListDiv.children];
-    let todoObj = new Todo();
-    addTodo(e, currentListDiv, currentListItems, todoObj);
-    // add event listener
-    addObjectToLS(listItems);
+    addTodo(e, currentListDiv, currentListItems, listItems);
   });
 }
 
-function addObjectToLS(listItems) {
-  listItems = document.querySelectorAll(".list-item");
-  listItems.forEach((item) => {
-    item.addEventListener("click", (e) => {});
-  });
-}
-
-function addTodo(e, currentListDiv, currentListItems, todoObj) {
+function addTodo(e, currentListDiv, currentListItems, listItems) {
+  listItems = [...document.querySelectorAll(".list-item")];
   // initial todo that creates array. Function ends early
   if (!currentListDiv.hasChildNodes()) {
     // Todo.createTodo();
-    todoObj.createTodo();
+    Todo.createTodo();
     return;
   }
   // engine begins to look at array to see if every item has a class of inactive. If this is true, then it will create a new todo.
@@ -50,7 +41,7 @@ function addTodo(e, currentListDiv, currentListItems, todoObj) {
     !e.target.matches("input[type='checkbox']")
   )
     // Todo.createTodo();
-    todoObj.createTodo();
+    Todo.createTodo();
   // If there is at least one todo active, make it inactive
   if (
     activity &&

@@ -14,7 +14,20 @@ export default class Todo {
     localStorage.setItem("Todo-List", JSON.stringify(listArrayOfObjects));
   }
 
-  createTodo() {
+  static createTodo() {
     createListItem();
+  }
+
+  static addEntry(nTitle, nDescription) {
+    let existingEntries = JSON.parse(localStorage.getItem("Todo-List"));
+    if (existingEntries == null) existingEntries = [];
+    let todoOb = {};
+    todoOb.title = nTitle;
+    todoOb.description = nDescription;
+
+    existingEntries.push(todoOb);
+    console.log(existingEntries);
+
+    localStorage.setItem("Todo-List", JSON.stringify(existingEntries));
   }
 }

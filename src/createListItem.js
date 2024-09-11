@@ -1,3 +1,5 @@
+import Todo from "./todo.js";
+
 export default function createListItem() {
   const currentListItems = document.querySelector(".current-list-items");
   currentListItems.appendChild(currentListItem().currentListItem);
@@ -16,7 +18,10 @@ function currentListText() {
   currentListText.classList.add("current-list-text");
   currentListText.appendChild(todoListCheckboxAndTitle().listTodoCheckbox);
   currentListText.appendChild(todoDescription().listTodoDescriptionBox);
-  // currentListItem.appendChild(currentListText);
+  let title = currentListText.children[0].children[1].value;
+  let description = currentListText.children[1].children[0].value;
+  Todo.addEntry(title, description);
+
   return { currentListText };
 }
 
@@ -37,6 +42,8 @@ function todoListCheckboxAndTitle() {
   inputTitleText.classList.add("list-item");
   inputTitleText.setAttribute("type", "text");
   inputTitleText.placeholder = "New To-Do";
+  // Todo.addEntry(inputTitleText);
+
   // append to first div
   listTodoCheckbox.appendChild(inputCheckbox);
   listTodoCheckbox.appendChild(inputTitleText);
@@ -53,6 +60,7 @@ function todoDescription() {
   inputDescription.classList.add("list-description");
   inputDescription.type = "text";
   inputDescription.placeholder = "Notes";
+  // Todo.addEntry(undefined, inputDescription.textContent);
 
   const trash = document.createElement("i");
   trash.classList.add("fa-solid");
