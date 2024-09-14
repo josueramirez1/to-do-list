@@ -20,7 +20,7 @@ function currentListText() {
   currentListText.appendChild(todoDescription().listTodoDescriptionBox);
   let title = currentListText.children[0].children[1].value;
   let description = currentListText.children[1].children[0].value;
-  Todo.addEntry(title, description);
+  Todo.createBlankEntry(title, description);
 
   return { currentListText };
 }

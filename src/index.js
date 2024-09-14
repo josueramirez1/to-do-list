@@ -25,8 +25,7 @@ function addTodo(e, currentListDiv, currentListItems, listItems) {
   listItems = [...document.querySelectorAll(".list-item")];
   // initial todo that creates array. Function ends early
   if (!currentListDiv.hasChildNodes()) {
-    // Todo.createTodo();
-    Todo.createTodo();
+    Todo.createBlankTodo();
     return;
   }
   // engine begins to look at array to see if every item has a class of inactive. If this is true, then it will create a new todo.
@@ -40,8 +39,7 @@ function addTodo(e, currentListDiv, currentListItems, listItems) {
     !e.target.matches(".list-description") &&
     !e.target.matches("input[type='checkbox']")
   )
-    // Todo.createTodo();
-    Todo.createTodo();
+    Todo.createBlankTodo();
   // If there is at least one todo active, make it inactive
   if (
     activity &&
@@ -57,6 +55,26 @@ function addTodo(e, currentListDiv, currentListItems, listItems) {
   // if user click on trash icon, todo is deleted
   deleteTodo(e);
   // add todo to local storage
+  updateTodoInLS(e);
+}
+
+function updateTodoInLS(e) {
+  // let existingEntries = JSON.parse(localStorage.getItem("Todo-List"));
+  // if (existingEntries == null) existingEntries = [];
+
+  const titles = [...document.querySelectorAll(".list-item")];
+  const descriptions = [...document.querySelectorAll(".list-description")];
+  const combined = [];
+  let todo = new Todo();
+
+  for (let i = 0; i < titles.length; i++) {
+    // todoObj.title = titles[i].value;
+    // todoObj.description = descriptions[i].value;
+    todo = new Todo(titles[i].value, descriptions[i].value);
+    combined.push(todo);
+  }
+
+  localStorage.setItem("Todo-List", JSON.stringify(combined));
 }
 
 function activeTodo(e) {
@@ -67,7 +85,6 @@ function activeTodo(e) {
       ".list-todo-checkbox"
     ).nextElementSibling.style.visibility = "visible";
   }
-  return;
 }
 
 function inactiveTodo(item) {
