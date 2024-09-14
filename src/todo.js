@@ -27,9 +27,4 @@ export default class Todo {
     existingEntries.push(todoOb);
     localStorage.setItem("Todo-List", JSON.stringify(existingEntries));
   }
-
-  createEntry(nTitle, nDescription) {
-    let existingEntries = JSON.parse(localStorage.getItem("Todo-List"));
-    if (existingEntries == null) existingEntries = [];
-  }
 }
