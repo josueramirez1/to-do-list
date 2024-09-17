@@ -1,3 +1,4 @@
+import createBlankListItem from "./createBlankListItem.js";
 import createListItem from "./createListItem.js";
 
 export default class Todo {
@@ -15,7 +16,7 @@ export default class Todo {
   }
 
   static createBlankTodo() {
-    createListItem();
+    createBlankListItem();
   }
 
   static createBlankEntry(nTitle, nDescription) {
@@ -26,5 +27,9 @@ export default class Todo {
     todoOb.description = nDescription;
     existingEntries.push(todoOb);
     localStorage.setItem("Todo-List", JSON.stringify(existingEntries));
+  }
+
+  createTodosFromLocalStorage(t, d) {
+    createListItem(t, d);
   }
 }

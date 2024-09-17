@@ -1,30 +1,31 @@
 import Todo from "./todo.js";
 
-export default function createListItem(t, d) {
+export default function createListItem() {
   const currentListItems = document.querySelector(".current-list-items");
-  currentListItems.appendChild(currentListItem(t, d).currentListItem);
+  currentListItems.appendChild(currentListItem().currentListItem);
 }
 
-function currentListItem(t, d) {
+function currentListItem() {
   const currentListItem = document.createElement("div");
   currentListItem.classList.add("current-list-item");
   currentListItem.classList.add("active");
-  currentListItem.appendChild(currentListText(t, d).currentListText);
+  currentListItem.appendChild(currentListText().currentListText);
   return { currentListItem };
 }
 
-function currentListText(t, d) {
+function currentListText() {
   const currentListText = document.createElement("div");
   currentListText.classList.add("current-list-text");
-  currentListText.appendChild(todoListCheckboxAndTitle(t, d).listTodoCheckbox);
-  currentListText.appendChild(todoDescription(t, d).listTodoDescriptionBox);
-  //   let title = currentListText.children[0].children[1].value;
-  //   let description = currentListText.children[1].children[0].value;
+  currentListText.appendChild(todoListCheckboxAndTitle().listTodoCheckbox);
+  currentListText.appendChild(todoDescription().listTodoDescriptionBox);
+  let title = currentListText.children[0].children[1].value;
+  let description = currentListText.children[1].children[0].value;
+  Todo.createBlankEntry(title, description);
 
   return { currentListText };
 }
 
-function todoListCheckboxAndTitle(t, d) {
+function todoListCheckboxAndTitle() {
   // FIRST DIV
   const listTodoCheckbox = document.createElement("div");
   listTodoCheckbox.classList.add("list-todo-checkbox");
@@ -41,7 +42,7 @@ function todoListCheckboxAndTitle(t, d) {
   inputTitleText.classList.add("list-item");
   inputTitleText.setAttribute("type", "text");
   inputTitleText.placeholder = "New To-Do";
-  inputTitleText.value = t;
+  // Todo.addEntry(inputTitleText);
 
   // append to first div
   listTodoCheckbox.appendChild(inputCheckbox);
@@ -50,7 +51,7 @@ function todoListCheckboxAndTitle(t, d) {
   return { listTodoCheckbox };
 }
 
-function todoDescription(t, d) {
+function todoDescription() {
   // Div that will contain input description
   const listTodoDescriptionBox = document.createElement("div");
   listTodoDescriptionBox.classList.add("list-todo-description-box");
@@ -59,7 +60,7 @@ function todoDescription(t, d) {
   inputDescription.classList.add("list-description");
   inputDescription.type = "text";
   inputDescription.placeholder = "Notes";
-  inputDescription.value = d;
+  // Todo.addEntry(undefined, inputDescription.textContent);
 
   const trash = document.createElement("i");
   trash.classList.add("fa-solid");
