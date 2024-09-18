@@ -4,7 +4,6 @@ import Todo from "./todo.js";
 function start() {
   const secondColumnBody = document.querySelector(".second-column-body");
   const currentListDiv = document.querySelector(".current-list-items");
-  // Todo.createLocalStorageArray();
   // if local storage contains saved data, write script to load the items to the ui.
   loadTodoToUI();
   addTodoToDomAndLocalStorage(secondColumnBody, currentListDiv);
@@ -36,28 +35,8 @@ function loadTodoToUI() {
   let todo = new Todo();
   existingEntries.forEach((obj) => {
     todo = new Todo(obj.title, obj.description);
-    console.log(todo);
     todo.createTodosFromLocalStorage(obj.title, obj.description);
   });
-
-  // existingEntries.forEach((object) => {
-  // let listItem = document.querySelectorAll(".list-item");
-  // let listDescript = document.querySelectorAll(".list-description");
-  // listItem.forEach((item) => (item.value = object.title));
-  // listDescript.forEach((item) => (item.value = object.description));
-  // listItem.value = object.title;
-  // listDescript.value = object.description;
-  // });
-
-  // for (let i = 0; i < existingEntries.length; i++) {
-  //   Todo.createBlankTodo();
-  //   let titles = [...document.querySelectorAll(".list-item")];
-  //   console.log(titles[0]);
-  //   // const descriptions = document.querySelectorAll(".list-description");
-  //   console.log(existingEntries[0].title);
-  //   existingEntries[i].title = titles[i];
-  //   console.log(titles[i].value);
-  // }
 }
 
 function updateTodoInLS(e) {

@@ -8,7 +8,7 @@ export default function createListItem(t, d) {
 function currentListItem(t, d) {
   const currentListItem = document.createElement("div");
   currentListItem.classList.add("current-list-item");
-  currentListItem.classList.add("active");
+  currentListItem.classList.add("inactive");
   currentListItem.appendChild(currentListText(t, d).currentListText);
   return { currentListItem };
 }
@@ -54,6 +54,7 @@ function todoDescription(t, d) {
   // Div that will contain input description
   const listTodoDescriptionBox = document.createElement("div");
   listTodoDescriptionBox.classList.add("list-todo-description-box");
+  listTodoDescriptionBox.style.visibility = "hidden";
   // The input description
   const inputDescription = document.createElement("input");
   inputDescription.classList.add("list-description");
