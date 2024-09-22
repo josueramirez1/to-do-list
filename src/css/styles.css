@@ -112,11 +112,6 @@ body {
   padding-top: 0.4rem;
 }
 
-/* .current-list-items {
-  display: flex;
-  flex-direction: column;
-} */
-
 .current-list-item.active {
   display: flex;
   gap: 0.6rem;

@@ -1,12 +1,21 @@
 import "./css/styles.css";
 import Todo from "./todo.js";
+import createNewList from "./createNewList.js";
 
 function start() {
   const secondColumnBody = document.querySelector(".second-column-body");
   const currentListDiv = document.querySelector(".current-list-items");
+  const newListFooterDiv = document.querySelector(".new-list-footer");
   // if local storage contains saved data, write script to load the items to the ui.
   loadTodoToUI();
   addTodoToDomAndLocalStorage(secondColumnBody, currentListDiv);
+  // addNewList(newListFooterDiv)
+}
+
+function addNewList(newListFooterDiv) {
+  newListFooterDiv.addEventListener("click", (e) => {
+    if (e.target.matches("fa-plus") || e.target.matches("p")) createNewList();
+  });
 }
 
 function addTodoToDomAndLocalStorage(secondColumnBody, currentListDiv) {
