@@ -12,7 +12,7 @@ export default class Todo {
 
   static createLocalStorageArray() {
     let listArrayOfObjects = [];
-    localStorage.setItem("Todo-List", JSON.stringify(listArrayOfObjects));
+    localStorage.setItem("Inbox", JSON.stringify(listArrayOfObjects));
   }
 
   static createBlankTodo() {
@@ -20,13 +20,13 @@ export default class Todo {
   }
 
   static createBlankEntry(nTitle, nDescription) {
-    let existingEntries = JSON.parse(localStorage.getItem("Todo-List"));
+    let existingEntries = JSON.parse(localStorage.getItem("Inbox"));
     if (existingEntries == null) existingEntries = [];
     let todoOb = {};
     todoOb.title = nTitle;
     todoOb.description = nDescription;
     existingEntries.push(todoOb);
-    localStorage.setItem("Todo-List", JSON.stringify(existingEntries));
+    localStorage.setItem("Inbox", JSON.stringify(existingEntries));
   }
 
   createTodosFromLocalStorage(t, d) {

@@ -45,6 +45,16 @@ body {
   padding: 2.2rem 1.2rem 0.4rem;
 }
 
+.all-lists {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.lists {
+  flex: 1;
+}
+
 .fa-solid,
 .fa-regular {
   width: 18px;
@@ -201,6 +211,11 @@ input[id="todo"] {
 
 .fa-trash {
   cursor: pointer;
+}
+
+.list-title input {
+  background-color: var(--whitesmoke);
+  border: none;
 }
 
 /* SECOND COLUMN FOOTER */

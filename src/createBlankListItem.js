@@ -42,7 +42,6 @@ function todoListCheckboxAndTitle() {
   inputTitleText.classList.add("list-item");
   inputTitleText.setAttribute("type", "text");
   inputTitleText.placeholder = "New To-Do";
-  // Todo.addEntry(inputTitleText);
 
   // append to first div
   listTodoCheckbox.appendChild(inputCheckbox);
@@ -60,13 +59,10 @@ function todoDescription() {
   inputDescription.classList.add("list-description");
   inputDescription.type = "text";
   inputDescription.placeholder = "Notes";
-  // Todo.addEntry(undefined, inputDescription.textContent);
 
   const trash = document.createElement("i");
   trash.classList.add("fa-solid");
   trash.classList.add("fa-trash");
-
-  // <i class="fa-solid fa-trash"></i>
 
   listTodoDescriptionBox.appendChild(inputDescription);
   listTodoDescriptionBox.appendChild(trash);

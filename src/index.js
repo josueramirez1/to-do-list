@@ -1,21 +1,31 @@
 import "./css/styles.css";
 import Todo from "./todo.js";
-import createNewList from "./createNewList.js";
+import List from "./list.js";
 
 function start() {
+  const lists = document.querySelector(".lists");
   const secondColumnBody = document.querySelector(".second-column-body");
   const currentListDiv = document.querySelector(".current-list-items");
-  const newListFooterDiv = document.querySelector(".new-list-footer");
   // if local storage contains saved data, write script to load the items to the ui.
   loadTodoToUI();
+  loadListToUI();
+  // When user clicks on second column whitespace...
   addTodoToDomAndLocalStorage(secondColumnBody, currentListDiv);
-  // addNewList(newListFooterDiv)
+  // When user clicks on new list button or first column white space
+  addNewListToDomAndLocalStorage(lists);
 }
 
-function addNewList(newListFooterDiv) {
-  newListFooterDiv.addEventListener("click", (e) => {
-    if (e.target.matches("fa-plus") || e.target.matches("p")) createNewList();
+function addNewListToDomAndLocalStorage(lists) {
+  document.addEventListener("click", (e) => {
+    // When user clicks on new list button...
+    addList(e, lists);
+    // When user clicks on whitespace
+    updateListsInLS(e);
   });
+}
+
+function addList(e, lists) {
+  if (e.target.closest(".new-list-footer")) List.createBlankLists(lists);
 }
 
 function addTodoToDomAndLocalStorage(secondColumnBody, currentListDiv) {
@@ -35,11 +45,11 @@ function addTodo(e, currentListItems) {
   // if user click on trash icon, todo is deleted
   deleteTodo(e);
   // local storage is automatically updated including addition and deletions
-  updateTodoInLS(e);
+  updateTodoInLS();
 }
 
 function loadTodoToUI() {
-  let existingEntries = JSON.parse(localStorage.getItem("Todo-List"));
+  let existingEntries = JSON.parse(localStorage.getItem("Inbox"));
   if (existingEntries == null) existingEntries = [];
   let todo = new Todo();
   existingEntries.forEach((obj) => {
@@ -48,7 +58,30 @@ function loadTodoToUI() {
   });
 }
 
-function updateTodoInLS(e) {
+function loadListToUI() {
+  let existingEntries = JSON.parse(localStorage.getItem("New-List"));
+  if (existingEntries == null) existingEntries = [];
+  let list = new List();
+  existingEntries.forEach((item) => {
+    list = new List(item.title);
+    list.createListsFromLocalStorage(item.title);
+  });
+}
+
+function updateListsInLS(e) {
+  const listArr = [];
+  let titles = [...document.querySelectorAll(".list-text-item")];
+  let list = new List();
+
+  for (let i = 0; i < titles.length; i++) {
+    list = new List(titles[i].value);
+    listArr.push(list);
+  }
+
+  localStorage.setItem("New-List", JSON.stringify(listArr));
+}
+
+function updateTodoInLS() {
   const titles = [...document.querySelectorAll(".list-item")];
   const descriptions = [...document.querySelectorAll(".list-description")];
   const combined = [];
@@ -59,7 +92,7 @@ function updateTodoInLS(e) {
     combined.push(todo);
   }
 
-  localStorage.setItem("Todo-List", JSON.stringify(combined));
+  localStorage.setItem("Inbox", JSON.stringify(combined));
 }
 
 function createTodo(e, currentListItems) {

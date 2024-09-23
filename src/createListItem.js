@@ -1,5 +1,3 @@
-import Todo from "./todo.js";
-
 export default function createListItem(t, d) {
   const currentListItems = document.querySelector(".current-list-items");
   currentListItems.appendChild(currentListItem(t, d).currentListItem);
