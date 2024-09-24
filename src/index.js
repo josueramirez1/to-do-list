@@ -21,7 +21,16 @@ function addNewListToDomAndLocalStorage(lists) {
     addList(e, lists);
     // When user clicks on whitespace
     updateListsInLS(e);
+    // When user clicks on trash icon
+    deleteList(e);
   });
+}
+
+function deleteList(e) {
+  if (e.target.closest(".trash-icon")) {
+    e.target.closest(".list-title").remove();
+    updateListsInLS();
+  }
 }
 
 function addList(e, lists) {

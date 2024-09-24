@@ -4,6 +4,7 @@ export default function createBlankList(lists) {
   lists.appendChild(div);
 
   let leftDiv = document.createElement("div");
+  leftDiv.classList.add("new-list-left-div");
   div.appendChild(leftDiv);
   let i = document.createElement("i");
   leftDiv.appendChild(i);
@@ -18,6 +19,7 @@ export default function createBlankList(lists) {
   input.classList.add("list-text-item");
 
   let rightDiv = document.createElement("div");
+  rightDiv.classList.add("trash-icon");
   div.appendChild(rightDiv);
   let trash = document.createElement("i");
   rightDiv.appendChild(trash);

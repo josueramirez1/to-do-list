@@ -43,12 +43,18 @@ body {
 
   background-color: var(--whitesmoke);
   padding: 2.2rem 1.2rem 0.4rem;
+
+  width: 100%;
 }
 
 .all-lists {
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.new-list-left-div {
+  display: flex;
 }
 
 .lists {
@@ -66,6 +72,10 @@ body {
   gap: 0.4rem;
   padding: 0.25rem 0;
   cursor: pointer;
+}
+
+.lists .list-title {
+  justify-content: space-between;
 }
 
 .list-title p {
