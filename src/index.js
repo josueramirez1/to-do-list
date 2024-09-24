@@ -1,11 +1,6 @@
 import "./css/styles.css";
-import addTodo, { loadTodoToUI } from "./todoFunctions.js";
-import {
-  addList,
-  deleteList,
-  loadListToUI,
-  updateListsInLS,
-} from "./listFunctions.js";
+import { addTodo as todoFunctions, loadTodoToUI } from "./todoFunctions.js";
+import { addList as listFunctions, loadListToUI } from "./listFunctions.js";
 
 function start() {
   const lists = document.querySelector(".lists");
@@ -23,18 +18,14 @@ function start() {
 function addNewListToDomAndLocalStorage(lists) {
   document.addEventListener("click", (e) => {
     // When user clicks on new list button...
-    addList(e, lists);
-    // When user clicks on whitespace
-    updateListsInLS(e);
-    // When user clicks on trash icon
-    deleteList(e);
+    listFunctions(e, lists);
   });
 }
 
 function addTodoToDomAndLocalStorage(secondColumnBody, currentListDiv) {
   secondColumnBody.addEventListener("click", (e) => {
     let currentListItems = [...currentListDiv.children];
-    addTodo(e, currentListItems);
+    todoFunctions(e, currentListItems);
   });
 }
 

@@ -1,16 +1,5 @@
 import List from "./list.js";
 
-export function deleteList(e) {
-  if (e.target.closest(".trash-icon")) {
-    e.target.closest(".list-title").remove();
-    updateListsInLS();
-  }
-}
-
-export function addList(e, lists) {
-  if (e.target.closest(".new-list-footer")) List.createBlankLists(lists);
-}
-
 export function loadListToUI() {
   let existingEntries = JSON.parse(localStorage.getItem("New-List"));
   if (existingEntries == null) existingEntries = [];
@@ -21,7 +10,22 @@ export function loadListToUI() {
   });
 }
 
-export function updateListsInLS(e) {
+export function addList(e, lists) {
+  if (e.target.closest(".new-list-footer")) List.createBlankLists(lists);
+  // When user clicks on whitespace
+  updateListsInLS(e);
+  // When user clicks on trash icon
+  deleteList(e);
+}
+
+function deleteList(e) {
+  if (e.target.closest(".trash-icon")) {
+    e.target.closest(".list-title").remove();
+    updateListsInLS();
+  }
+}
+
+function updateListsInLS(e) {
   const listArr = [];
   let titles = [...document.querySelectorAll(".list-text-item")];
   let list = new List();

@@ -1,6 +1,6 @@
 import Todo from "./todo";
 
-export default function addTodo(e, currentListItems) {
+export function addTodo(e, currentListItems) {
   // user begins to create todos and write
   createTodo(e, currentListItems);
   // Makes item inactive if user clicks outside of the text box
