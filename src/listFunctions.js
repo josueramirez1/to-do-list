@@ -1,7 +1,7 @@
 import List from "./list.js";
 
 export function loadListToUI() {
-  let existingEntries = JSON.parse(localStorage.getItem("New-List"));
+  let existingEntries = JSON.parse(localStorage.getItem("Custom-List"));
   if (existingEntries == null) existingEntries = [];
   let list = new List();
   existingEntries.forEach((item) => {
@@ -35,5 +35,5 @@ function updateListsInLS(e) {
     listArr.push(list);
   }
 
-  localStorage.setItem("New-List", JSON.stringify(listArr));
+  localStorage.setItem("Custom-List", JSON.stringify(listArr));
 }
