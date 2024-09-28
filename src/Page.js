@@ -1,6 +1,20 @@
+import Todo from "./todo.js";
+
 export default class Page {
   constructor(title) {
     this.title = title;
+  }
+
+  loadTodoToUI() {
+    let currentListTitle = document.querySelector(".current-list-title")
+      .children[1].textContent;
+    let existingEntries = JSON.parse(localStorage.getItem(currentListTitle));
+    if (existingEntries == null) existingEntries = [];
+    let todo = new Todo();
+    existingEntries.forEach((obj) => {
+      todo = new Todo(obj.title, obj.description);
+      todo.createTodosFromLocalStorage(obj.title, obj.description);
+    });
   }
 
   setItemToLocalStorage() {

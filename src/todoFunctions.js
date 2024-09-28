@@ -14,7 +14,9 @@ export function addTodo(e, currentListItems) {
 }
 
 export function loadTodoToUI() {
-  let existingEntries = JSON.parse(localStorage.getItem("Inbox"));
+  let currentListTitle = document.querySelector(".current-list-title")
+    .children[1].textContent;
+  let existingEntries = JSON.parse(localStorage.getItem(currentListTitle));
   if (existingEntries == null) existingEntries = [];
   let todo = new Todo();
   existingEntries.forEach((obj) => {
@@ -24,6 +26,8 @@ export function loadTodoToUI() {
 }
 
 function updateTodoInLS() {
+  let currentListTitle = document.querySelector(".current-list-title")
+    .children[1].textContent;
   const titles = [...document.querySelectorAll(".list-item")];
   const descriptions = [...document.querySelectorAll(".list-description")];
   const combined = [];
@@ -34,7 +38,7 @@ function updateTodoInLS() {
     combined.push(todo);
   }
 
-  localStorage.setItem("Inbox", JSON.stringify(combined));
+  localStorage.setItem(currentListTitle, JSON.stringify(combined));
 }
 
 function createTodo(e, currentListItems) {
@@ -64,6 +68,7 @@ function makeTodoItemActive(e) {
 function makeTodoItemInactive(e, currentListItems) {
   // engine looks through array to find item that contains the active class. If this is true, then a function will fire which will remove the active todo and remove visibility.
   let activity = currentListItems.find((item) => item.matches(".active"));
+
   // If there is at least one todo active, make it inactive
   if (
     activity &&
