@@ -14,13 +14,21 @@ export function addTodo(e, currentListItems) {
 }
 
 export function loadTodoToUI() {
+  // Finding the name in the ui
   let currentListTitle = document.querySelector(".current-list-title")
     .children[1].textContent;
+  // Finding the name in local storage and storing it to variable
   let existingEntries = JSON.parse(localStorage.getItem(currentListTitle));
-  if (existingEntries == null) existingEntries = [];
+  if (existingEntries == null) {
+    existingEntries = [];
+    Todo.createLocalStorageArray();
+  }
+  // calling Todo object and setting to todo variable
   let todo = new Todo();
   existingEntries.forEach((obj) => {
+    // looking through the array to find title and description
     todo = new Todo(obj.title, obj.description);
+    // calling method and passing title and description
     todo.createTodosFromLocalStorage(obj.title, obj.description);
   });
 }

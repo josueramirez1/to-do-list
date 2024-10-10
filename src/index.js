@@ -13,16 +13,36 @@ function start() {
   addTodoToDomAndLocalStorage(secondColumnBody);
   // When user clicks on new list button or first column white space
   addNewListToDomAndLocalStorage(lists);
-
   addNewPageToDomAndLocalStorage(secondColumnBody);
+}
+
+function dragTodos() {
+  let draggableElement = [...document.querySelectorAll(".current-list-item")];
+  draggableElement.forEach((dragElement) => {
+    dragElement.draggable = true;
+
+    dragElement.addEventListener("dragstart", (e) => {
+      dragElement.draggable = true;
+      if (
+        e.target.matches(".current-list-item") ||
+        e.target.matches(".current-list-text")
+      ) {
+        dragElement.classList.add("dragging");
+      }
+    });
+
+    dragElement.addEventListener("dragend", () => {
+      dragElement.classList.remove("dragging");
+    });
+  });
 }
 
 function addTodoToDomAndLocalStorage(secondColumnBody) {
   secondColumnBody.addEventListener("click", (e) => {
     let currentListDiv = document.querySelector(".current-list-items");
     let currentListItems = [...currentListDiv.children];
-    console.log(currentListItems);
     todoFunctions(e, currentListItems);
+    dragTodos();
   });
 }
 

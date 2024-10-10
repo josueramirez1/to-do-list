@@ -16,9 +16,6 @@ function currentListText(t, d) {
   currentListText.classList.add("current-list-text");
   currentListText.appendChild(todoListCheckboxAndTitle(t, d).listTodoCheckbox);
   currentListText.appendChild(todoDescription(t, d).listTodoDescriptionBox);
-  //   let title = currentListText.children[0].children[1].value;
-  //   let description = currentListText.children[1].children[0].value;
-
   return { currentListText };
 }
 
@@ -26,7 +23,6 @@ function todoListCheckboxAndTitle(t, d) {
   // FIRST DIV
   const listTodoCheckbox = document.createElement("div");
   listTodoCheckbox.classList.add("list-todo-checkbox");
-  // currentListText.appendChild(listTodoCheckbox);
 
   // input: checkbox
   const inputCheckbox = document.createElement("input");

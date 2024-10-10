@@ -34,6 +34,7 @@ export default class Todo {
   }
 
   createTodosFromLocalStorage(t, d) {
+    // This function will create the ui list item
     createListItem(t, d);
   }
 }

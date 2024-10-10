@@ -132,6 +132,13 @@ body {
   padding-top: 0.4rem;
 }
 
+.current-list-item.active.dragging,
+.list-todo-checkbox,
+.list-todo-description-box {
+  opacity: 0.5;
+  width: 50%;
+}
+
 .current-list-item.active {
   display: flex;
   gap: 0.6rem;
@@ -185,6 +192,7 @@ body {
   width: 100%;
   gap: 0.6rem;
   margin-bottom: 0.4rem;
+  opacity: 1;
 }
 
 input[id="todo"] {
@@ -205,6 +213,7 @@ input[id="todo"] {
 .list-todo-description-box {
   display: flex;
   width: 100%;
+  opacity: 1;
 }
 
 .list-description {

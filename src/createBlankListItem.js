@@ -9,6 +9,7 @@ function currentListItem() {
   const currentListItem = document.createElement("div");
   currentListItem.classList.add("current-list-item");
   currentListItem.classList.add("active");
+
   currentListItem.appendChild(currentListText().currentListText);
   return { currentListItem };
 }
