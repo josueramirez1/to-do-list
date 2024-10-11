@@ -28,11 +28,19 @@ function dragTodos() {
         e.target.matches(".current-list-text")
       ) {
         dragElement.classList.add("dragging");
+        let currentText = [...dragElement.children];
+        let currentTextChildren = [...currentText[0].children];
+        currentTextChildren.forEach((child) => child.classList.add("dragging"));
       }
     });
 
     dragElement.addEventListener("dragend", () => {
       dragElement.classList.remove("dragging");
+      let currentText = [...dragElement.children];
+      let currentTextChildren = [...currentText[0].children];
+      currentTextChildren.forEach((child) =>
+        child.classList.remove("dragging")
+      );
     });
   });
 }

@@ -133,10 +133,10 @@ body {
 }
 
 .current-list-item.active.dragging,
-.list-todo-checkbox,
-.list-todo-description-box {
+.list-todo-checkbox.dragging,
+.list-todo-description-box.dragging {
   opacity: 0.5;
-  width: 50%;
+  width: 35%;
 }
 
 .current-list-item.active {
@@ -203,6 +203,7 @@ input[id="todo"] {
 .list-item {
   border: none;
   flex: 1;
+  margin-top: 0.2rem;
 }
 
 .list-item:focus,
