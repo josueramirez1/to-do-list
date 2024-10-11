@@ -131,12 +131,12 @@ body {
 .current-list-title .fa-solid {
   padding-top: 0.4rem;
 }
-
+.current-list-item.inactive.dragging,
 .current-list-item.active.dragging,
 .list-todo-checkbox.dragging,
 .list-todo-description-box.dragging {
   opacity: 0.5;
-  width: 35%;
+  width: 65%;
 }
 
 .current-list-item.active {
@@ -144,11 +144,9 @@ body {
   gap: 0.6rem;
   border-radius: 5px;
   padding: 0.4rem 1rem;
-
   width: 100%;
   height: 80px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-
   opacity: 1;
   animation-name: fadeInOpacity;
   animation-iteration-count: 1;
@@ -198,6 +196,16 @@ body {
 input[id="todo"] {
   display: inline-block;
   margin-top: 0.2rem;
+}
+
+.list-todo-checkbox.dragging .list-item {
+  width: 100%;
+}
+
+.list-todo-checkbox.dragging input[type="checkbox"],
+.list-todo-description-box.dragging .list-description,
+.list-todo-description-box.dragging .fa-trash {
+  visibility: hidden;
 }
 
 .list-item {

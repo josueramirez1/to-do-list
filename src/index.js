@@ -1,7 +1,7 @@
 import "./css/styles.css";
 import { addTodo as todoFunctions, loadTodoToUI } from "./todoFunctions.js";
 import { addList as listFunctions, loadListToUI } from "./listFunctions.js";
-import createNewPage from "./createBlankPage.js";
+import createNewPageOrReload from "./createBlankAndReloadPage.js";
 
 function start() {
   const lists = document.querySelector(".lists");
@@ -63,7 +63,7 @@ function addNewListToDomAndLocalStorage(lists) {
 
 function addNewPageToDomAndLocalStorage(secondColumnBody) {
   document.addEventListener("click", (e) => {
-    createNewPage(e, secondColumnBody);
+    createNewPageOrReload(e, secondColumnBody);
   });
 }
 
