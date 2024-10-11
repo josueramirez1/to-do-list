@@ -1,12 +1,13 @@
 import Page from "./page.js";
 import Todo from "./todo.js";
 
-export default function createNewPageOrReload(e, secondColumnBody) {
+export default function createReloadDeletePage(e, secondColumnBody) {
   let currentListTitle;
   // Finding the name in the ui
   if (e.target.matches(".fa-list") && e.target.closest(".list-title")) {
     currentListTitle = e.target.nextElementSibling.value;
   } else return;
+
   // Finding the name in local storage and storing it to variable
   let existingEntries = JSON.parse(localStorage.getItem(currentListTitle));
   if (existingEntries == null) existingEntries = [];

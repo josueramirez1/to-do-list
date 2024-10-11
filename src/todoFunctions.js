@@ -11,6 +11,8 @@ export function addTodo(e, currentListItems) {
   deleteTodo(e);
   // local storage is automatically updated including addition and deletions
   updateTodoInLS();
+  // dragging todos
+  dragTodos();
 }
 
 export function loadTodoToUI() {
@@ -30,6 +32,35 @@ export function loadTodoToUI() {
     todo = new Todo(obj.title, obj.description);
     // calling method and passing title and description
     todo.createTodosFromLocalStorage(obj.title, obj.description);
+  });
+}
+
+function dragTodos() {
+  let draggableElement = [...document.querySelectorAll(".current-list-item")];
+  draggableElement.forEach((dragElement) => {
+    dragElement.draggable = true;
+
+    dragElement.addEventListener("dragstart", (e) => {
+      dragElement.draggable = true;
+      if (
+        e.target.matches(".current-list-item") ||
+        e.target.matches(".current-list-text")
+      ) {
+        dragElement.classList.add("dragging");
+        let currentText = [...dragElement.children];
+        let currentTextChildren = [...currentText[0].children];
+        currentTextChildren.forEach((child) => child.classList.add("dragging"));
+      }
+    });
+
+    dragElement.addEventListener("dragend", () => {
+      dragElement.classList.remove("dragging");
+      let currentText = [...dragElement.children];
+      let currentTextChildren = [...currentText[0].children];
+      currentTextChildren.forEach((child) =>
+        child.classList.remove("dragging")
+      );
+    });
   });
 }
 
@@ -90,8 +121,13 @@ function makeTodoItemInactive(e, currentListItems) {
 }
 
 function deleteTodo(e) {
-  if (e.target.matches(".fa-trash"))
+  if (
+    e.target.matches(".fa-trash") &&
+    e.target.closest(".list-todo-description-box")
+  ) {
+    console.log("yes");
     e.target.closest(".current-list-item").remove();
+  }
 }
 
 // Helper function for makeTodoItemInactive

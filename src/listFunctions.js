@@ -1,4 +1,5 @@
 import List from "./list.js";
+import Page from "./page.js";
 
 export function loadListToUI() {
   let existingEntries = JSON.parse(localStorage.getItem("Custom-List"));
@@ -10,17 +11,28 @@ export function loadListToUI() {
   });
 }
 
-export function addList(e, lists) {
+export function addList(e, lists, secondColumnBody) {
   if (e.target.closest(".new-list-footer")) List.createBlankLists(lists);
   // When user clicks on whitespace
   updateListsInLS(e);
   // When user clicks on trash icon
-  deleteList(e);
+  deleteList(e, secondColumnBody);
 }
 
-function deleteList(e) {
-  if (e.target.closest(".trash-icon")) {
+function deleteList(e, secondColumnBody) {
+  let currentListTitle;
+  // Finding the name in the ui
+
+  // This deletes list from local storage
+  if (e.target.closest(".trash-icon") && e.target.matches(".fa-trash")) {
+    currentListTitle =
+      e.target.closest(".trash-icon").previousElementSibling.children[1].value;
     e.target.closest(".list-title").remove();
+    localStorage.removeItem(currentListTitle);
+    // this creates new default page
+    let page = new Page();
+    page.createDefaultPage(secondColumnBody);
+    // this updates custom list in local storage
     updateListsInLS();
   }
 }

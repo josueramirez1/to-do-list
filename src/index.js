@@ -1,7 +1,7 @@
 import "./css/styles.css";
 import { addTodo as todoFunctions, loadTodoToUI } from "./todoFunctions.js";
 import { addList as listFunctions, loadListToUI } from "./listFunctions.js";
-import createNewPageOrReload from "./createBlankAndReloadPage.js";
+import createReloadDeletePage from "./createAddDeletePage.js";
 
 function start() {
   const lists = document.querySelector(".lists");
@@ -10,60 +10,30 @@ function start() {
   loadTodoToUI();
   loadListToUI();
   // When user clicks on second column whitespace...
-  addTodoToDomAndLocalStorage(secondColumnBody);
+  todoDomLocalStorage(secondColumnBody);
   // When user clicks on new list button or first column white space
-  addNewListToDomAndLocalStorage(lists);
-  addNewPageToDomAndLocalStorage(secondColumnBody);
+  listDomLocalStorage(lists, secondColumnBody);
+  addReloadDeletePageToDomAndLocalStorage(secondColumnBody);
 }
 
-function dragTodos() {
-  let draggableElement = [...document.querySelectorAll(".current-list-item")];
-  draggableElement.forEach((dragElement) => {
-    dragElement.draggable = true;
-
-    dragElement.addEventListener("dragstart", (e) => {
-      dragElement.draggable = true;
-      if (
-        e.target.matches(".current-list-item") ||
-        e.target.matches(".current-list-text")
-      ) {
-        dragElement.classList.add("dragging");
-        let currentText = [...dragElement.children];
-        let currentTextChildren = [...currentText[0].children];
-        currentTextChildren.forEach((child) => child.classList.add("dragging"));
-      }
-    });
-
-    dragElement.addEventListener("dragend", () => {
-      dragElement.classList.remove("dragging");
-      let currentText = [...dragElement.children];
-      let currentTextChildren = [...currentText[0].children];
-      currentTextChildren.forEach((child) =>
-        child.classList.remove("dragging")
-      );
-    });
-  });
-}
-
-function addTodoToDomAndLocalStorage(secondColumnBody) {
+function todoDomLocalStorage(secondColumnBody) {
   secondColumnBody.addEventListener("click", (e) => {
     let currentListDiv = document.querySelector(".current-list-items");
     let currentListItems = [...currentListDiv.children];
     todoFunctions(e, currentListItems);
-    dragTodos();
   });
 }
 
-function addNewListToDomAndLocalStorage(lists) {
+function listDomLocalStorage(lists, secondColumnBody) {
   document.addEventListener("click", (e) => {
     // When user clicks on new list button...
-    listFunctions(e, lists);
+    listFunctions(e, lists, secondColumnBody);
   });
 }
 
-function addNewPageToDomAndLocalStorage(secondColumnBody) {
+function addReloadDeletePageToDomAndLocalStorage(secondColumnBody) {
   document.addEventListener("click", (e) => {
-    createNewPageOrReload(e, secondColumnBody);
+    createReloadDeletePage(e, secondColumnBody);
   });
 }
 
