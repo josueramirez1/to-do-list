@@ -11,6 +11,7 @@ export default function createNewList(title) {
   let i = document.createElement("i");
   leftDiv.appendChild(i);
 
+  i.classList.add("custom");
   i.classList.add("fa-solid");
   i.classList.add("fa-list");
   i.style = "color: #e663bf";

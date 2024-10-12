@@ -1,7 +1,9 @@
 import "./css/styles.css";
 import { addTodo as todoFunctions, loadTodoToUI } from "./todoFunctions.js";
 import { addList as listFunctions, loadListToUI } from "./listFunctions.js";
-import createReloadDeletePage from "./createAddDeletePage.js";
+import customCreateReloadPage, {
+  defaultCreateReloadPage,
+} from "./createAddPage.js";
 
 function start() {
   const lists = document.querySelector(".lists");
@@ -33,7 +35,8 @@ function listDomLocalStorage(lists, secondColumnBody) {
 
 function addReloadDeletePageToDomAndLocalStorage(secondColumnBody) {
   document.addEventListener("click", (e) => {
-    createReloadDeletePage(e, secondColumnBody);
+    customCreateReloadPage(e, secondColumnBody);
+    defaultCreateReloadPage(e, secondColumnBody);
   });
 }
 

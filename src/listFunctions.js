@@ -21,17 +21,16 @@ export function addList(e, lists, secondColumnBody) {
 
 function deleteList(e, secondColumnBody) {
   let currentListTitle;
-  // Finding the name in the ui
-
   // This deletes list from local storage
   if (e.target.closest(".trash-icon") && e.target.matches(".fa-trash")) {
     currentListTitle =
       e.target.closest(".trash-icon").previousElementSibling.children[1].value;
     e.target.closest(".list-title").remove();
     localStorage.removeItem(currentListTitle);
-    // this creates new default page
+    // When list is deleted, this creates new default page
     let page = new Page();
     page.createDefaultPage(secondColumnBody);
+    page.loadTodoToUI("Inbox");
     // this updates custom list in local storage
     updateListsInLS();
   }

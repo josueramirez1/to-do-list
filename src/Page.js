@@ -5,10 +5,9 @@ export default class Page {
     this.title = title;
   }
 
-  loadTodoToUI() {
-    let currentListTitle = document.querySelector(".current-list-title")
-      .children[1].textContent;
+  loadTodoToUI(currentListTitle) {
     let existingEntries = JSON.parse(localStorage.getItem(currentListTitle));
+
     if (existingEntries == null) existingEntries = [];
     let todo = new Todo();
     existingEntries.forEach((obj) => {
@@ -22,7 +21,10 @@ export default class Page {
     localStorage.setItem(this.title, JSON.stringify(newListItemArray));
   }
 
-  createPage(secondColumnBody) {
+  createPage(e, secondColumnBody) {
+    let icon = [...e.target.classList];
+    let iconColor = e.target.style.color;
+
     secondColumnBody.textContent = "";
 
     let listTitle = document.createElement("div");
@@ -34,14 +36,12 @@ export default class Page {
 
     let i = document.createElement("i");
     let h2 = document.createElement("h2");
-    i.classList.add("fa-solid");
-    i.classList.add("fa-list");
+    i.classList.add(icon[1]);
+    i.classList.add(icon[2]);
     i.classList.add("fa-xl");
-    i.style.color = "rgb(230, 99, 191)";
+    i.style.color = iconColor;
     i.setAttribute("aria-hidden", true);
-
     h2.textContent = this.title;
-
     listTitle.appendChild(i);
     listTitle.appendChild(h2);
   }
