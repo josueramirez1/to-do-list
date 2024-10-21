@@ -125,7 +125,6 @@ function deleteTodo(e) {
     e.target.matches(".fa-trash") &&
     e.target.closest(".list-todo-description-box")
   ) {
-    console.log("yes");
     e.target.closest(".current-list-item").remove();
   }
 }
