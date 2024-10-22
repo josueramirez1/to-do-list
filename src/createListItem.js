@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 export default function createListItem(t, d) {
   const currentListItems = document.querySelector(".current-list-items");
   currentListItems.appendChild(currentListItem(t, d).currentListItem);
@@ -36,10 +38,41 @@ function todoListCheckboxAndTitle(t, d) {
   inputTitleText.setAttribute("type", "text");
   inputTitleText.placeholder = "New To-Do";
   inputTitleText.value = t;
+  // input: calendar
+  const dateCreated = document.createElement("input");
+  dateCreated.type = "date";
+  const currentDate = format(new Date(), "MM/dd/yyyy");
+  dateCreated.value = currentDate;
+  dateCreated.classList.add("list-date");
+
+  // input: dropdown
+  const labelCreated = document.createElement("label");
+  labelCreated.for = "priority";
+  labelCreated.innerText = "Choose Priority";
+  labelCreated.classList.add("list-label");
+  const selectCreated = document.createElement("select");
+  selectCreated.id = "priority";
+  selectCreated.classList.add("list-label-priority");
+  const option1 = document.createElement("option");
+  option1.value = "high";
+  option1.innerText = "High";
+  const option2 = document.createElement("option");
+  option2.value = "medium";
+  option2.innerText = "Medium";
+  const option3 = document.createElement("option");
+  option3.value = "low";
+  option3.innerText = "Low";
+
+  selectCreated.appendChild(option1);
+  selectCreated.appendChild(option2);
+  selectCreated.appendChild(option3);
+  labelCreated.appendChild(selectCreated);
 
   // append to first div
   listTodoCheckbox.appendChild(inputCheckbox);
   listTodoCheckbox.appendChild(inputTitleText);
+  listTodoCheckbox.appendChild(dateCreated);
+  listTodoCheckbox.appendChild(labelCreated);
 
   return { listTodoCheckbox };
 }

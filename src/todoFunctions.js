@@ -89,13 +89,21 @@ function createTodo(e, currentListItems) {
     inactivity &&
     !e.target.matches(".list-item") &&
     !e.target.matches(".list-description") &&
-    !e.target.matches("input[type='checkbox']")
+    !e.target.matches("input[type='checkbox']") &&
+    !e.target.matches(".list-date") &&
+    !e.target.matches(".list-label") &&
+    !e.target.matches(".list-label-priority")
   )
     Todo.createBlankTodo();
 }
 
 function makeTodoItemActive(e) {
-  if (e.target.matches(".list-item")) {
+  if (
+    e.target.matches(".list-item") ||
+    e.target.matches(".list-date") ||
+    e.target.matches(".list-label") ||
+    e.target.matches(".list-label-priority")
+  ) {
     e.target.closest(".current-list-item").classList.remove("inactive");
     e.target.closest(".current-list-item").classList.add("active");
     e.target.closest(
