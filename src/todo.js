@@ -21,7 +21,7 @@ export default class Todo {
     createBlankListItem();
   }
 
-  static createBlankEntry(nTitle, nDescription) {
+  static createBlankEntry(nTitle, nDescription, nDate, nPriority) {
     let currentListTitle = document.querySelector(".current-list-title")
       .children[1].textContent;
     let existingEntries = JSON.parse(localStorage.getItem(currentListTitle));
@@ -29,7 +29,10 @@ export default class Todo {
     let todoOb = {};
     todoOb.title = nTitle;
     todoOb.description = nDescription;
+    todoOb.dueDate = nDate;
+    todoOb.priority = nPriority;
     existingEntries.push(todoOb);
+    console.log(currentListTitle);
     localStorage.setItem(currentListTitle, JSON.stringify(existingEntries));
   }
 

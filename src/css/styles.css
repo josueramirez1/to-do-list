@@ -40,10 +40,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   background-color: var(--whitesmoke);
   padding: 2.2rem 1.2rem 0.4rem;
-
   width: 100%;
 }
 
@@ -200,6 +198,17 @@ input[id="todo"] {
 
 .list-todo-checkbox.dragging .list-item {
   width: 100%;
+}
+
+.list-date,
+.list-label {
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--lightgrey);
+}
+
+.list-label-priority {
+  margin-left: 0.2rem;
 }
 
 .list-todo-checkbox.dragging input[type="checkbox"],

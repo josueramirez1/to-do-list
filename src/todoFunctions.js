@@ -29,9 +29,14 @@ export function loadTodoToUI() {
   let todo = new Todo();
   existingEntries.forEach((obj) => {
     // looking through the array to find title and description
-    todo = new Todo(obj.title, obj.description);
+    todo = new Todo(obj.title, obj.description, obj.dueDate, obj.priority);
     // calling method and passing title and description
-    todo.createTodosFromLocalStorage(obj.title, obj.description);
+    todo.createTodosFromLocalStorage(
+      obj.title,
+      obj.description,
+      obj.dueDate,
+      obj.priority
+    );
   });
 }
 
@@ -69,11 +74,23 @@ function updateTodoInLS() {
     .children[1].textContent;
   const titles = [...document.querySelectorAll(".list-item")];
   const descriptions = [...document.querySelectorAll(".list-description")];
+  const days = [...document.querySelectorAll(".list-date")];
+  const options = [...document.querySelectorAll(".list-label-priority")];
+  const arrayOfSelectedOptions = options.map((option) => {
+    const arrOfOptions = [...option.children];
+    const selectedOptions = arrOfOptions.find((op) => op.selected);
+    return selectedOptions;
+  });
   const combined = [];
   let todo = new Todo();
 
   for (let i = 0; i < titles.length; i++) {
-    todo = new Todo(titles[i].value, descriptions[i].value);
+    todo = new Todo(
+      titles[i].value,
+      descriptions[i].value,
+      days[i].value,
+      arrayOfSelectedOptions[i].innerText
+    );
     combined.push(todo);
   }
 

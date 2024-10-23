@@ -41,14 +41,14 @@ function todoListCheckboxAndTitle(t, d) {
   // input: calendar
   const dateCreated = document.createElement("input");
   dateCreated.type = "date";
-  const currentDate = format(new Date(), "MM/dd/yyyy");
+  const currentDate = format(new Date(), "yyyy-MM-dd");
   dateCreated.value = currentDate;
   dateCreated.classList.add("list-date");
 
   // input: dropdown
   const labelCreated = document.createElement("label");
   labelCreated.for = "priority";
-  labelCreated.innerText = "Choose Priority";
+  labelCreated.innerText = "Priority";
   labelCreated.classList.add("list-label");
   const selectCreated = document.createElement("select");
   selectCreated.id = "priority";

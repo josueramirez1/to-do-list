@@ -22,7 +22,13 @@ function currentListText() {
   currentListText.appendChild(todoDescription().listTodoDescriptionBox);
   let title = currentListText.children[0].children[1].value;
   let description = currentListText.children[1].children[0].value;
-  Todo.createBlankEntry(title, description);
+  let day = currentListText.children[0].children[2].value;
+  let options = [
+    ...currentListText.children[0].children[3].children[0].children,
+  ];
+  let checked = options.filter((check) => check.selected);
+  let priority = checked[0].innerText;
+  Todo.createBlankEntry(title, description, day, priority);
 
   return { currentListText };
 }
@@ -31,7 +37,6 @@ function todoListCheckboxAndTitle() {
   // FIRST DIV
   const listTodoCheckbox = document.createElement("div");
   listTodoCheckbox.classList.add("list-todo-checkbox");
-  // currentListText.appendChild(listTodoCheckbox);
 
   // input: checkbox
   const inputCheckbox = document.createElement("input");
@@ -47,14 +52,14 @@ function todoListCheckboxAndTitle() {
   // input: calendar
   const dateCreated = document.createElement("input");
   dateCreated.type = "date";
-  const currentDate = format(new Date(), "MM/dd/yyyy");
+  const currentDate = format(new Date(), "yyyy-MM-dd");
   dateCreated.value = currentDate;
   dateCreated.classList.add("list-date");
 
   // input: dropdown
   const labelCreated = document.createElement("label");
   labelCreated.for = "priority";
-  labelCreated.innerText = "Choose Priority";
+  labelCreated.innerText = "Priority";
   labelCreated.classList.add("list-label");
   const selectCreated = document.createElement("select");
   selectCreated.id = "priority";
